@@ -42,4 +42,41 @@ ReactDOM.render(<App/>, document.querySelector('.container'));
 ```
 
 
-La notion de composant
+## La notion de composant
+- Dans React, tout est composant. Par exemple, une barre de recherche, une vidéo, une image avec une description. On peut les stocker dans un dossier *components* dans le dossier *src*. Les conteneurs contiennent des composants, on peut les stocker dans un dossier *containers*.
+- Le premier fichier appelé lorsqu'on lance le projet est celui indiqué dans le main d fichier *package.json*, par exemple *index.js*
+- pour pouvoir importer un composant, il faut l'exporter là ou il est créé avec la commande `export default App;` par exemple
+- *index.js* doit avoir un seul travail qui est d'afficher *App* qui est un conteneur
+
+```js
+// app.js
+import React from 'react'
+
+const App = function(){
+  return <div>Hello World</div>
+}
+
+export default App;
+
+//index.js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './containers/app'
+
+ReactDOM.render(<App/>, document.querySelector('.container'));
+```
+
+## La notion de classe
+
+On peut faire une classe, qui est un composant plus puissant, à la place d'une fonction que l'on stocke dans une constante
+```js
+import React, {Component} from 'react'
+
+class SearchBar extends Component{
+  render(){ // fonction appelé par défaut dès que la classe est instanciée
+    return <input/>
+  }
+}
+
+export default SearchBar;
+```
