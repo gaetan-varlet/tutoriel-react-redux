@@ -73,10 +73,85 @@ On peut faire une classe, qui est un composant plus puissant, à la place d'une 
 import React, {Component} from 'react'
 
 class SearchBar extends Component{
-  render(){ // fonction appelé par défaut dès que la classe est instanciée
+  render(){ // une des fonctions appelée dès que la classe est instanciée
     return <input/>
   }
 }
 
 export default SearchBar;
 ```
+
+## Le state
+
+Le state est créé au moment où la classe est instanciée, dans le constructeur.
+
+```js
+import React, {Component} from 'react'
+
+class SearchBar extends Component{
+  constructor(props){
+    super(props) // permet de recevoir des propriétés de composants parents
+    // création du state en lui affectant une valeur
+    this.state = {searchText:"",placeHolder:"Tapez votre film..."}
+  }
+  render(){
+    return (
+      <div>
+        <input onChange={this.handleChange.bind(this)} placeholder={this.state.placeHolder}/>
+        // onChange est appelé à chaque modification de l'input
+        // bind(this) permet de raccrocher le contexte de la classe dans la fonction handleChange : this de la classe est maintenant accessible dans la fonction handleChange
+        // this.state.placeHolder permet de récupérer le placeHolder définit dans le state
+        <p>{this.state.searchText}</p>
+      <div>
+    )
+  }
+  handleChange(event){
+    // onChange envoie automatiquement en paramètre un événement de la fonction son événement
+    this.setState({searchText:event.target.value})
+    // this.state est immutable, ça écrase les objets, il faut donc utiliser setState
+    // event.target.value permet d'accéder à la valeur de l'input
+    // quand il y a une modification dans l'état, render() est automatiquement appelé, on peut donc afficher en live les modifications. React ne rafraîchit que ce qui change.
+  }
+}
+
+export default SearchBar;
+```
+
+## Les props et map()
+
+Les props ne sont pas modifiables, il faut passer par une autre variable pour le faire.
+
+```js
+import React from 'react'
+
+const VideoListItem = (props) => {
+    return <li>Un film recommandé : {props.movie}</li>
+}
+export default VideoListItem;
+```
+
+```js
+import React from 'react'
+import VideoListItem from '../component/video-list-item'
+
+const VideoList = () => {
+    const movies = ["film1","film2","film3"]
+    return (
+      <div>
+          <ul>
+            {
+              movies.map(movie => {
+                return <VideoListItem key={movie} movie={movie}/>
+              })
+              // map est une fonction qui permet de boucler sur un tableau, équivalent à :
+              // <VideoListItem movie=(movies[0])/> <VideoListItem movie=(movies[1])/> <VideoListItem movie=(movies[2])/>
+              // chaque enfant dans une map doit avoir une clé (key) unique comme propriété. On peut par exemple définir key={movie}
+            }
+          </ul>
+      </div>
+    );
+}
+export default VideoList;
+```
+
+## Ajax
