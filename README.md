@@ -154,4 +154,74 @@ const VideoList = () => {
 export default VideoList;
 ```
 
-## Ajax
+## Les requêtes Ajax avec axios
+
+Il faut commencer par installer axios avec la commande `npm install axios`
+
+```js
+// app.js
+import React from 'react'
+import SearchBar from '../components/search-bar'
+import VideoList from './video-list'
+import axios from 'axios'
+import VideoDetail from '../components/'
+
+const API_END_POINT = "https://api.themoviedb.org/3/"
+const POPULAR_MOVIES_URL = "hdiscover/movie?language=fr..."
+const API_KEY = "api_key=eakkdfjfgifsdg..."
+
+class App extends Component{
+  constructor(propos){
+    super(props)
+    this.state={movieList:{}, currentMovie:{}}
+  }
+  componentWillMount(){ // fonction où l'on fait la requête Ajax (fonction appelée au moment où le composant est chargé)
+    this.initMovies();
+  }
+  initMovies(){
+    axios.get(`${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`)
+    .then(function(response){
+      this.setState({movieList:response.data.results.slice(1,6),
+      currentMovie:response.date.result[0]});
+      // slice garde les 5 premiers éléments du tableau
+    }).bind(this);
+  }
+
+  render(){
+    const renderVideoList = () => {
+      if(this.state.movieList.length>=5){
+        return <VideoList movieList={this.state.movieList}/>
+      }
+    }
+    return (
+      <div>
+        <SearchBar/>
+        {renderVideoList()}
+        <VideoDetail title={this.state.currentMovie.title}
+        description={this.state.currentMovie.overview} />
+      </div>
+    )  
+  }
+}
+
+export default App:
+```
+
+```js
+// video-detail.js
+import React from 'react'
+
+const VideoDetail = ({title, description}) => {
+  return (
+    <div>
+      <h1>{title}<h1/>
+      <p>{description}</p>
+    <div/>
+  )
+}
+export default VideoDetail;
+```
+
+## CSS Bootstrap
+
+Le mot clé `class` étant déjà utilisé en React, une classe CSS est définit par le mot clé **className**, par exemple `<div className="row">`
