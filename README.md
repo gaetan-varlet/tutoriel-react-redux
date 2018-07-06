@@ -102,7 +102,7 @@ class SearchBar extends Component{
         // bind(this) permet de raccrocher le contexte de la classe dans la fonction handleChange : this de la classe est maintenant accessible dans la fonction handleChange
         // this.state.placeHolder permet de récupérer le placeHolder définit dans le state
         <p>{this.state.searchText}</p>
-      <div>
+      </div>
     )
   }
   handleChange(event){
