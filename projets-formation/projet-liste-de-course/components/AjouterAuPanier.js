@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 
-export default class AjouterProduit extends Component {
+export default class AjouterAuPanier extends Component {
   render() {
     return (
       <div>
@@ -14,7 +14,7 @@ export default class AjouterProduit extends Component {
           <label htmlFor="inputPrix">Prix produit</label>
           <input id="inputPrix" ref="inputPrix" type="text" />
           <br />
-          <button onClick={e => this.handleClick(e)}>Ajouter produit</button>
+          <button onClick={e => this.handleClick(e)}>Ajouter au panier</button>
         </fieldset>
       </div>
     );
