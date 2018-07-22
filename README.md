@@ -36,7 +36,7 @@ const App = function(){
 }
 
 ReactDOM.render(<App/>, document.querySelector('.container'));
-// render() est la fonction de base de React pour affichier du contenu à l'écran
+// render() est la fonction de base de React pour afficher du contenu à l'écran
 // <App/> permet de passer une instance de App à render
 // document.querySelector() permet d'insérer dans le DOM notre instance de App
 ```
