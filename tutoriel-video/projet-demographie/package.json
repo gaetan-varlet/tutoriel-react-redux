@@ -28,8 +28,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-preset-stage-1": "^6.1.18",
+    "chart.js": "^2.7.2",
+    "chartkick": "^3.0.1",
     "lodash": "^3.10.1",
     "react": "^0.14.3",
+    "react-chartkick": "^0.3.0",
     "react-dom": "^0.14.3",
     "react-redux": "4.3.0",
     "react-router": "^2.0.1",
