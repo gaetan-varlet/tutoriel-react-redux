@@ -9,13 +9,27 @@ const yTitle = "% Mortalité"
 ReactChartkick.addAdapter(Chart)
 
 class MortalityListItem extends Component {
+
     render(){
+        const {mortality} = this.props
+        const formatedDataMale = this.formatMortalityData(mortality.male)
+        const formatedDataFemale = this.formatMortalityData(mortality.female)
+        
         return(
-            <div>
-                <Flag country="France" className="flag_medium"/>
-                <ColumnChart xtitle={xTitle} ytitle={yTitle} data={[["12",13],["14",18],["39",45]]}/>
-            </div>
+            <tr>
+                <td><Flag country={mortality.country} className="flag_medium"/></td>
+                <td className="col-md-6"><ColumnChart xtitle={xTitle} ytitle={yTitle} data={formatedDataMale} max="30"/></td>
+                <td className="col-md-6"><ColumnChart xtitle={xTitle} ytitle={yTitle}  data={formatedDataFemale} max="30"/></td>
+            </tr>
         )
+    }
+
+    formatMortalityData(mortality){
+        const array = mortality.map((data) => {
+            return [Math.trunc(data.age).toString(), data.mortality_percent]
+        })
+        return array
+
     }
 }
 

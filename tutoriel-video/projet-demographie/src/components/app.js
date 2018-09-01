@@ -7,7 +7,7 @@ export default class App extends Component {
     return (
       <div>
         <SearchBar defaultCountry="France"/>
-        <MortalityList/>
+        <MortalityList defaultCountry="France"/>
       </div>
     );
   }
