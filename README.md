@@ -222,6 +222,43 @@ const VideoDetail = ({title, description}) => {
 export default VideoDetail;
 ```
 
-## CSS Bootstrap
 
-Le mot clé `class` étant déjà utilisé en React, une classe CSS est définit par le mot clé **className**, par exemple `<div className="row">`
+
+## Mise en place d'une fausse API
+
+Nous allons utiliser [JSON Server](https://github.com/typicode/json-server)
+- installer *JSON Server* avec `npm install -g json-server` ou `sudo npm install -g json-server`
+- créer un fichier `db.json` avec le contenu suivant :
+```json
+{
+  "posts": [
+    { "id": 1, "title": "json-server", "author": "typicode" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}
+```
+- lancer le serveur avec la commande `json-server --watch db.json` ou `sudo json-server --watch db.json`
+- le serveur est accessible à l'URL `http://localhost:3000/`
+- pour changer de port utiliser l'option `--port`, par exemple `sudo json-server --watch db.json --port 3004` puis accéder au serveur à l'URL `http://localhost:3004/`
+
+Installer **Casual** avec `npm install casual`. Cela permet de générer des fausses données.
+- créer un fichier `fillDB.js` qui va nous servir à remplir la base de données
+```js
+var casual = require('casual')
+
+module.exports = () => {
+    const data = { posts: [] }
+    for (let i = 0; i < 25; i++) {
+      data.posts.push({
+        id: i, title: casual.title,
+        content: casual.sentences(n=10),
+        author: casual.name
+      })
+    }
+    return data
+  }
+```
+- exécuter *JSON Server* sur ce fichier : `sudo json-server --watch fillDB.js --port 3004`
