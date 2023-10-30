@@ -30,6 +30,8 @@ Il y a des concurrents à **React**, notamment **Angular** développé par Googl
   - [Create React App](https://create-react-app.dev/) : `npx create-react-app my-app`
   - [Vite](https://vitejs.dev/) : `npm create vite@latest`
 
+Installation de l'extension **React Dev Tools**
+
 ## Un premier exemple
 
 Un fichier *index.html* à la racine du projet et un fichier *index.js* dans un dossier *src*
