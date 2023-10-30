@@ -35,6 +35,46 @@ Il y a des concurrents à **React**, notamment **Angular** développé par Googl
 
 Installation de l'extension **React Dev Tools**
 
+## La syntaxe JSX
+
+- JSX (**JavaScript Syntax Extension**) est une extension React de la syntaxe du langage JavaScript
+- JSX représente la structure HTML à injecter dans le code
+
+Particularités :
+- les attributs sont écrit en **camelCase** sauf pour les attributs commençant par `data-` et `aria-`
+- l'attribut `class` s'écrit `className`, pour éviter un conflit avec le mot clé `class` en JS
+- l'attribut `for` s'écrit `htmlFor`, pour éviter un conflit avec le mot clé `for` en JS
+- l'attribut `style` s'écrit sous forme d'objet avec les propriétés CSS écrites en **camelCase**  
+Exemple : `<div style={{width: 50, backgroundColor: 'red'}} />`
+
+Une fonction ne peut renvoyer qu'**un seul noeud JSX racine**. Possibilité d'utiliser un **fragment** su on ne souhaite pas ajouter d'élément HTML :
+
+```js
+function App(){
+  return <>
+        <p>Premier paragraphe</p>
+        <p>Second paragraphe</p>
+    </>
+}
+export default App
+```
+
+### Interpoler les variables
+
+- afficher le contenu de variables dans le code HTML avec les accolades
+
+```js
+function App() {
+  const prenom = "Gaëtan";
+  return <p>Je m'appelle {prenom}</p>;
+}
+```
+
+
+
+
+
+
 ## Un premier exemple
 
 Un fichier *index.html* à la racine du projet et un fichier *index.js* dans un dossier *src*
