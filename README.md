@@ -27,7 +27,10 @@ Il y a des concurrents à **React**, notamment **Angular** développé par Googl
 
 - possibilité d'utiliser **CodeSandox** en utilisant le modèle fourni sur la documentation de React pour tester **React** sans rien installer
 - Utilisation de **Node JS** pour travailler en local :
-  - [Create React App](https://create-react-app.dev/) : `npx create-react-app my-app`
+  - [Create React App](https://create-react-app.dev/)
+    - applicatiob JavaScript : `npx create-react-app my-app`
+    - application TypeScript : `npx create-react-app my-app --template typescript`
+    - démarrage de l'application : `npm start`, URL : `http://localhost:3000/`
   - [Vite](https://vitejs.dev/) : `npm create vite@latest`
 
 Installation de l'extension **React Dev Tools**
