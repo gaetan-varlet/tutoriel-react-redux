@@ -47,7 +47,7 @@ Particularités :
 - l'attribut `style` s'écrit sous forme d'objet avec les propriétés CSS écrites en **camelCase**  
 Exemple : `<div style={{width: 50, backgroundColor: 'red'}} />`
 
-Une fonction ne peut renvoyer qu'**un seul noeud JSX racine**. Possibilité d'utiliser un **fragment** su on ne souhaite pas ajouter d'élément HTML (`<>` anciennenement `<Fragment>`)
+Une fonction ne peut renvoyer qu'**un seul noeud JSX racine**. Possibilité d'utiliser un **fragment** si on ne souhaite pas ajouter d'élément HTML (`<>` anciennenement `<Fragment>`)
 
 ```js
 function App(){
@@ -88,7 +88,7 @@ function App() {
 ### Affichage de tableaux
 
 - utilisation de la méthode `map()` des tableaux pour créer plusieurs composants enfants
-- il faut ajouter un attribut `key` (identifian unique), que React utilise pour comprendre les changements dans les données
+- il faut ajouter un attribut `key` (identifiant unique), que React utilise pour comprendre les changements dans les données
 
 ```js
 function App() {
@@ -138,7 +138,7 @@ export function App () {
 
 ### Le fichier main
 - `ReactDOM` permet de brancher React au DOM
-- il faut préciser dans la fontion `createRoot` l'élément HTML auquel on va brancher notre noeud React, ici l'élément **root** dans le fichier `index.html` qui correspond à une `div` vide
+- il faut préciser dans la fonction `createRoot` l'élément HTML auquel on va brancher notre noeud React, ici l'élément **root** dans le fichier `index.html` qui correspond à une `div` vide
 - la fonction `render()` permet de préciser quel noeud React il faut afficher
 - la balise `<React.StrictMode>` est une balise qui sert au développement pour afficher les erreurs
 
