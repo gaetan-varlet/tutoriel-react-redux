@@ -2,7 +2,7 @@
 
 ## Introduction
 
-- **React** est une librairie JavaSript, développée par Facebook, pour créer facilement des interfaces web.
+- **React** est une librairie JavaSript, développée par Facebook, pour créer facilement des interfaces web
 - **Node JS** permet de compiler le projet
 - **NPM** pour *node package manager* est le gestionnaire de paquet pour installer les dépendances, il scanne le fichier *package.json*
   - `npm install` permet d'installer les dépendances du projet
@@ -14,11 +14,13 @@ Le code est écrit en JSX (Javascript XML) et en ES6 (Javascript moderne qui per
 L'ES6 n'est pas encore compris par tous les navigateurs, il faut donc transpiler grâce à **Babel** le JSX et l'ES6 en ES5 qui est bien compris par les navigateurs.  
 En sortie de la compilation, on a 3 fichiers utilisés par le navigateur : *index.html*, *style.css* et *bundle.js*
 
+Il y a des concurrents à **React**, notamment **Angular** développé par Google, ou encore **VueJS**.
+
 ## Redux
 
 - **Flux** est un pattern de gestion des données
 - **Redux** est une implémentation qui permet de gérer l'état d'une application. React et Redux sont souvent utilisés ensemble
-- il y a des concurrents à **React**, notamment **Angular** développé par Google, ou encore **VueJS**
+
 
 ## Un premier exemple
 
