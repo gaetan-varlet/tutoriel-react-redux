@@ -2,7 +2,9 @@
 
 ## Introduction
 
-- **React** est une librairie JavaSript, développée par Facebook, pour créer facilement des interfaces web
+- **React** est une librairie JavaSript, développée par Facebook, pour construire facilement des interfaces utilisateurs à partir de briques individuelles appelées composants
+  - [Tutoriel Grafikart](https://grafikart.fr/formations/react)
+  - [Site de React](https://fr.react.dev/)
 - **Node JS** permet de compiler le projet
 - **NPM** pour *node package manager* est le gestionnaire de paquet pour installer les dépendances, il scanne le fichier *package.json*
   - `npm install` permet d'installer les dépendances du projet
