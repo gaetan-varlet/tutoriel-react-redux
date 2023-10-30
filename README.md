@@ -3,8 +3,8 @@
 ## Introduction
 
 - **React** est une librairie JavaSript, développée par Facebook, pour construire facilement des interfaces utilisateurs à partir de briques individuelles appelées composants
-  - [Tutoriel Grafikart](https://grafikart.fr/formations/react)
   - [Site de React](https://fr.react.dev/)
+  - [Tutoriel Grafikart](https://grafikart.fr/formations/react)
 - **Node JS** permet de compiler le projet
 - **NPM** pour *node package manager* est le gestionnaire de paquet pour installer les dépendances, il scanne le fichier *package.json*
   - `npm install` permet d'installer les dépendances du projet
@@ -18,11 +18,17 @@ En sortie de la compilation, on a 3 fichiers utilisés par le navigateur : *inde
 
 Il y a des concurrents à **React**, notamment **Angular** développé par Google, ou encore **VueJS**.
 
-## Redux
+### Redux
 
 - **Flux** est un pattern de gestion des données
 - **Redux** est une implémentation qui permet de gérer l'état d'une application. React et Redux sont souvent utilisés ensemble
 
+## Installation
+
+- possibilité d'utiliser **CodeSandox** en utilisant le modèle fourni sur la documentation de React pour tester **React** sans rien installer
+- Utilisation de **Node JS** pour travailler en local :
+  - [Create React App](https://create-react-app.dev/) : `npx create-react-app my-app`
+  - [Vite](https://vitejs.dev/) : `npm create vite@latest`
 
 ## Un premier exemple
 
