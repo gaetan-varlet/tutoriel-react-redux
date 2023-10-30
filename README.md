@@ -154,6 +154,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
+## Mettre à jour l’affichage avec le hook useState
+
+TODO
+
 
 ## Un premier exemple
 
