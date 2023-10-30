@@ -47,7 +47,7 @@ Particularités :
 - l'attribut `style` s'écrit sous forme d'objet avec les propriétés CSS écrites en **camelCase**  
 Exemple : `<div style={{width: 50, backgroundColor: 'red'}} />`
 
-Une fonction ne peut renvoyer qu'**un seul noeud JSX racine**. Possibilité d'utiliser un **fragment** su on ne souhaite pas ajouter d'élément HTML :
+Une fonction ne peut renvoyer qu'**un seul noeud JSX racine**. Possibilité d'utiliser un **fragment** su on ne souhaite pas ajouter d'élément HTML (`<>` anciennenement `<Fragment>`)
 
 ```js
 function App(){
@@ -56,7 +56,6 @@ function App(){
         <p>Second paragraphe</p>
     </>
 }
-export default App
 ```
 
 ### Interpoler les variables
@@ -70,9 +69,90 @@ function App() {
 }
 ```
 
+### Affichage conditionnel
 
+- Une chaine de caractères vide, une valeur `null`, `undefined` ou `false` font échouer la condition
 
+```js
+function App() {
+  const condition = "bip";
+  return (
+    <>
+      {condition && <p>C'est OK</p>}
+      {condition ? <p>Condition OK</p> : <p>Condition pas OK</p>}
+    </>
+  );
+}
+```
 
+### Affichage de tableaux
+
+- utilisation de la méthode `map()` des tableaux pour créer plusieurs composants enfants
+- il faut ajouter un attribut `key` (identifian unique), que React utilise pour comprendre les changements dans les données
+
+```js
+function App() {
+  const products = [
+    { title: "Chou", id: 1 },
+    { title: "Ail", id: 2 },
+    { title: "Pomme", id: 3 }
+  ];
+  return (
+    <ul>
+      {products.map((product) => (
+        <li key={product.id}>{product.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Ecouteur d'évènement
+- JSX permet de brancher des écouteurs d'événements sur nos éléments HTML à travers des attributs commençant par `on`, qui aura en paramètre une fonction qui sera exécutée lorsque l'événement est déclenché
+- possibilité de récupérer l'événement et de le manipuler. Il s'agit d'un événement React et non de l'événement natif du navigateur, avec les mêmes possibilités
+
+```js
+function MyButton() {
+  const handleClick = (e) => {
+    alert("Vous avez cliqué !");
+  };
+  return <button onClick={handleClick}>Cliquez ici</button>;
+}
+```
+
+### Une fonction = Un composant
+- avec React, on parle de **composant**, qui est décrit sous la forme d'une fonction
+- ce découpage permet d'éviter la répétition et permet d'avoir des composants réutilisables
+- la fonction reçoit les attributs sous forme d'objet et renvoie du JSX
+- la propriété `children` est un peu différente, elle correspond à l'élément entre les balises
+
+```js
+function Title ({color, children}) {
+    return <h1 style={{color: color}}>{children}</h1>
+}
+
+export function App () {
+    return <Title color="red">Mon super titre</Title>
+}
+```
+
+### Le fichier main
+- `ReactDOM` permet de brancher React au DOM
+- il faut préciser dans la fontion `createRoot` l'élément HTML auquel on va brancher notre noeud React, ici l'élément **root** dans le fichier `index.html` qui correspond à une `div` vide
+- la fonction `render()` permet de préciser quel noeud React il faut afficher
+- la balise `<React.StrictMode>` est une balise qui sert au développement pour afficher les erreurs
+
+```js
+import React from 'react'
+import React from 'react-dom/client'
+import App from './App.jsx'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+```
 
 
 ## Un premier exemple
