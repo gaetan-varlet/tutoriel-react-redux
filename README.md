@@ -141,7 +141,8 @@ export function App () {
 - `ReactDOM` permet de brancher React au DOM
 - il faut préciser dans la fonction `createRoot` l'élément HTML auquel on va brancher notre noeud React, ici l'élément **root** dans le fichier `index.html` qui correspond à une `div` vide
 - la fonction `render()` permet de préciser quel noeud React il faut afficher
-- la balise `<React.StrictMode>` est une balise qui sert au développement pour afficher les erreurs
+- la balise `<React.StrictMode>` est une balise qui rend 2 fois les composants pour mettre en évidence des problèmes potentiels dans l'application
+  - fonctionne uniquement en mode développement, n'impacte pas la version de production
 
 ```js
 import React from 'react'
@@ -181,6 +182,55 @@ export default function MyApp() {
   );
 }
 ```
+
+Il ne faut pas modifier un objet mais en créer un nouveau, sinon React ne fera pas de re-rendu
+
+```js
+function MyButton() {
+  const [person, setPerson] = useState({
+    prenom: "John",
+    age: 12
+  });
+  const handleClick = () => {
+    setPerson({ ...person, age: person.age + 1 });
+  };
+  return (
+    <>
+      <p>Age de {person.prenom} : {person.age}</p>
+      <button onClick={handleClick}>Augmenter l'âge de 1</button>
+    </>
+  );
+}
+```
+
+### Partager des données entre composants
+
+- il est possible de faire remonter l'état d'un composant pour le partager entre composants. En déplaçant l’état vers le haut, nos composants peuvent le partager
+- dans l'exemple ci-dessous :
+  - la prop `onClick` de chaque bouton utilise la fonction `handleClick` issue de `MyApp`, c’est donc ce code-là qui s’exécute et incrémenter `count`
+  - la nouvelle valeur count est passée comme prop à chaque bouton, de sorte qu’ils affichent tous cette nouvelle valeur
+
+```js
+const MyButton = ({ count, onClick }) => {
+  return <button onClick={onClick}>Cliqué {count} fois</button>;
+};
+
+export default function MyApp() {
+  const [count, setCount] = useState(0);
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+  return (
+    <div>
+      <h1>Des compteurs synchronisés</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
+  );
+}
+```
+
+
 
 ## Un premier exemple
 
