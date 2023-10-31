@@ -109,6 +109,7 @@ function App() {
 
 ### Ecouteur d'évènement
 - JSX permet de brancher des écouteurs d'événements sur nos éléments HTML à travers des attributs commençant par `on`, qui aura en paramètre une fonction qui sera exécutée lorsque l'événement est déclenché
+- il ne faut pas mettre les parenthèses à la fonction dans l'événement, sinon elle est appelée directement !
 - possibilité de récupérer l'événement et de le manipuler. Il s'agit d'un événement React et non de l'événement natif du navigateur, avec les mêmes possibilités
 
 ```js
@@ -156,8 +157,30 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ## Mettre à jour l’affichage avec le hook useState
 
-TODO
+- possibilité de gérer un état (mémoire interne d'un composant) qui est utilisé dans le rendu JSX avec `useState`
+- `useState` renvoie 2 choses, l'état courant et la fonction pour le mettre à jour : `[something, setSomething]`
+- lorsqu'on modifie l'état, React met automatiquement à jour l'affichage
 
+```js
+import { useState } from "react";
+
+function MyButton() {
+  const [count, setCount] = useState(0);
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+  return <button onClick={handleClick}>Cliqué {count} fois</button>;
+}
+export default function MyApp() {
+  return (
+    <div>
+      <h1>Des compteurs indépendants</h1>
+      <MyButton />
+      <MyButton />
+    </div>
+  );
+}
+```
 
 ## Un premier exemple
 
