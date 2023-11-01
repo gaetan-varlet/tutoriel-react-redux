@@ -205,6 +205,7 @@ function MyButton() {
 
 ### Partager des données entre composants
 
+- il est possible de faire descendre de l'information aux composants enfants via les **props**
 - il est possible de faire remonter l'état d'un composant pour le partager entre composants. En déplaçant l’état vers le haut, nos composants peuvent le partager
 - dans l'exemple ci-dessous :
   - la prop `onClick` de chaque bouton utilise la fonction `handleClick` issue de `MyApp`, c’est donc ce code-là qui s’exécute et incrémenter `count`
@@ -230,6 +231,42 @@ export default function MyApp() {
 }
 ```
 
+## Les formulaires avec React
+
+- création d'un champ **controlé**, React controle le le champ, mise à jour de la valeur dès que la valeur est modifiée (via un re-render)
+- il n'est pas possible de mettre une valeur `undefined`, plutôt mettre une chaine de caractères vide
+
+```js
+export function App() {
+  const [value, setValue] = useState("Toto");
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+  return (
+    <form>
+      <input name="firstname" value={value} onChange={handleChange} />
+    </form>
+  );
+}
+```
+
+- possibilité d'utilisé un champ **non controlé**, React nous laisse gérer le champ comme on le souhaite (pas de re-render)
+- possibilité d'ajouter une propriété `defaultValue` pour spécifier la valeur initiale, et un `onChange` si nécessaire
+
+```js
+export function App() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(new FormData(e.target).get("firstname")); // valeur du champ firstname
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <input name="firstname" defaultValue="Toto" />
+      <button>Envoyer</button>
+    </form>
+  );
+}
+```
 
 
 ## Un premier exemple
