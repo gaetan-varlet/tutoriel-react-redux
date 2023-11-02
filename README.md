@@ -288,14 +288,14 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  // s’exécute au montage *mais aussi* si a ou b changent depuis le rendu précédent
-}, [a, b]);
-
-useEffect(() => {
   return () => {
     // s'exécute au démontage du composant
   };
 }, []);
+
+useEffect(() => {
+  // s’exécute au montage *mais aussi* si a ou b changent depuis le rendu précédent
+}, [a, b]);
 ```
 
 
