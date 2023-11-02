@@ -298,6 +298,26 @@ useEffect(() => {
 }, [a, b]);
 ```
 
+## Mettre en cache des données avec useMemo
+
+- `useMemo` permet de mettre en cache le résultat d’un calcul d’un rendu à l’autre
+- fonction qui prend 2 arguments, comme `useEffect`, une fonction de calcul, et une liste de dépendances
+
+Exemple :
+- lors du rendu initial, la valeur renvoyée par `useMemo` sera le résultat de l’appel au calcul
+- lors des rendus suivants, React comparera les dépendances avec celles passées lors du rendu précédent. Si aucune dépendance n’a changé, `useMemo` continuera à utiliser la même valeur déjà calculée
+
+```js
+import { useMemo } from 'react';
+
+function TodoList({ todos, tab, theme }) {
+  const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
+  // ...
+}
+```
+
+**Vous ne devriez recourir à useMemo que pour optimiser les performances**
+
 
 ## Un premier exemple
 
