@@ -268,6 +268,36 @@ export function App() {
 }
 ```
 
+## Le hook useEffect
+
+- permet de générer des effets de bord lorsque certaines propriétés ou états des composants changent
+- sert en général à la synchronisation avec des systèmes extérieurs
+- fonction qui prend 2 paramètres
+  - une fonction qui sera appelé lorsqu'une dépandence change
+  - un tableau de dépendances, ce qui permet d'appeler le code seulement dans certaines conditions et pas tout le temps (à chaque re-rendu)
+
+```js
+import { useEffect } from 'react';
+
+useEffect(() => {
+  // s’exécute après chaque rendu
+});
+
+useEffect(() => {
+  // s’exécute uniquement au montage (apparition du composant)
+}, []);
+
+useEffect(() => {
+  // s’exécute au montage *mais aussi* si a ou b changent depuis le rendu précédent
+}, [a, b]);
+
+useEffect(() => {
+  return () => {
+    // s'exécute au démontage du composant
+  };
+}, []);
+```
+
 
 ## Un premier exemple
 
