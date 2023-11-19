@@ -318,6 +318,33 @@ function TodoList({ todos, tab, theme }) {
 
 **Vous ne devriez recourir à useMemo que pour optimiser les performances**
 
+## Le hook useRef
+
+## Créer un hook personnalisé
+
+## Mémoisation et useCallback
+
+## Les portails dans React
+
+## Capturer les erreurs avec ErrorBoundary
+
+## Chargement asynchrone via lazy()
+
+## Le hook useReducer
+
+## Le hook useContext
+
+## Tester du code react
+
+## Propriétés de rendu
+
+## React router dom
+
+## Animer avec framer motion
+
+## Découverte de react-query
+
+
 
 ## Un premier exemple
 
