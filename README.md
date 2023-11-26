@@ -25,7 +25,7 @@ Il y a des concurrents à **React**, notamment **Angular** développé par Googl
 
 ## Installation
 
-- possibilité d'utiliser **CodeSandox** en utilisant le modèle fourni sur la documentation de React pour tester **React** sans rien installer
+- possibilité d'utiliser **CodeSandox** (`https://codesandbox.io/s/react-new`) en utilisant le modèle fourni sur la documentation de React pour tester **React** sans rien installer
 - Utilisation de **Node JS** pour travailler en local :
   - [Create React App](https://create-react-app.dev/)
     - applicatiob JavaScript : `npx create-react-app my-app`
@@ -320,9 +320,139 @@ function TodoList({ todos, tab, theme }) {
 
 ## Le hook useRef
 
+- permet d'avoir un objet unique, qui a une clé courante, **current**, dans laquelle on peut assigner une valeur
+- permet de sauvegarder la référence d'un élément HTML
+- possibilité de modifier la valeur d'une référence sans faire de re-rendu
+
+
 ## Créer un hook personnalisé
 
+- permet de créer des fonctions réutilisables pour limiter la répétition, en se basant sur les hooks existants, et alléger le code des composants
+
+Hook permettant de passer une valeur de true à false
+```js
+function useToggle(initial = false){
+  const [state, setState] = useState(initial)
+  // fonction qui permet de changer l'état
+  const toggle = () => setState(v => !v)
+  return [state, toggle]
+}
+
+function App(){
+  const [checked, toggleCheck] = useToggle()
+  return <input type="checkbox" checked={checked} onChange={toggleCheck}/>
+}
+```
+
+Hook permettant d'incrémenter ou décrémenter une valeur
+```js
+
+export function useIncrement ({base = 0, max = Infinity, min = -Infinity}) {
+    const [state, setState] = useState(base)
+    return {
+        count: state,
+        increment: () => setState(v => v < max ? v+1 : v),
+        decrement: () => setState(v => v > min ? v-1 : v)
+    }
+}
+
+function App(){
+  const {count, decrement, increment} = useIncrement({base: 0, min: 0, max: 10})
+  return <div>
+      Compteur {count}
+      <button onClick={increment}>Incrémenter</button>
+      <button onClick={decrement}>Décrémenter</button>
+  </div>
+}
+```
+
+Hook permettant de modifier le titre de la page
+```js
+export function useDocumentTitle (title) {
+    // mise en mémoire du titre original pour le réinitialiser si le composant est démonté
+    const titleRef = useRef(document.title)
+    useEffect(() => {
+        return () => {
+            document.title = titleRef.current
+        }
+    }, []);
+    useEffect(() => {
+        document.title = title
+    }, [title]);
+}
+function App(){
+  useDocumentTitle("Titre de ma page")
+  return <div>...</div>
+}
+```
+
+Hook permettant de récupérer des données auprès d'une API
+```js
+export function useFetch (url, options ={}) {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+  const [errors, setErrors] = useState(null)
+
+  useEffect(() => {
+    fetch(url, {
+      ...options,
+      headers: {
+        'Accept': 'application/json; charset=UTF-8',
+        ...options.headers,
+      }
+    })
+    .then(r => r.json())
+    .then(data => setData(data))
+    .catch(e => setErrors(e))
+    .finally(() => setLoading(false))
+  }, [])
+
+  return {loading, data, errors}
+}
+
+function App(){
+  const {loading, data, errors} = useFetch('https://jsonplaceholder.typicode.com/users')
+  return <>
+  {loading && <div>Chargement en cours</div>}
+  {errors && <div>{errors.toString()}</div>}
+  {data && <ul>{data.map(user => <li key={user.id}>{user.name}</li>)}</ul>}
+  </>
+}
+```
+
+Il existe des librairies de hooks personnalisés, qui permet par exemple d'avoir un hook **useFetch**, comme `https://usehooks-ts.com/`
+
+
 ## Mémoisation et useCallback
+
+- un composant est rendu (exécuté) à chaque fois que son état change ou lorsqu'on composant parent est re-rendu
+- cela peut entrainer des problèmes de performances si un composant a une logique de rendu complexe
+- pour éviter de rendre systématiquement un composant, on peut utiliser la fonction `memo()` qui fera en sorte qu'il n'y ait un re-rendu que s'il y a des propriétés qui changent
+
+ ```js
+ const MonComposant = memo((props) => {
+    return <div>
+        Je suis un composant couteux
+    </div>
+})
+ ```
+
+- lorsqu'on donne une fonction en paramètre, il faut l'entourer de `useCallback`, car elle est redéclarée à chaque fois que le composant `Demo` est exécuté, et donc fait un nouveau rendu
+- `useCallback()` est simplement un `useMemo()` spécifiquement conçu pour les fonctions
+- il faut mettre les variables éventuelles de la fonction dans le tableau des dépendances
+
+```js
+function Demo () {
+    const handleClick = useCallback(() => console.log('ceci est un clic'), [])
+
+    return <div>
+        <MonComposant onClick={handleClick} />
+    </div>
+}
+```
+
+Comme pour **useMemo**, à n'utiliser que pour optimiser les performances, après avoir tenté de réorganiser les composants pour limiter les re-rendus.
+
 
 ## Les portails dans React
 
