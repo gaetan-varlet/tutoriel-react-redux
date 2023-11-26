@@ -499,6 +499,20 @@ function App () {
 
 ## Chargement asynchrone via lazy()
 
+- `lazy` permet de charger un composant de manière asynchrone, pour alléger le chargement initiale de la page (par exemple ne pas charger systématiquement des composants lourds comme des graphiques)
+- il faut utiliser la fonction `lazy` (ne fonctionne qu'avec les imports par défaut) dans la définition du composant
+- lors de son appel, notre composant doit être entouré d'un composant `Suspence` qui permet d'afficher un `fallback` pendant le chargement du composant
+
+```js
+import { lazy } from 'react'
+
+const MarkdownPreview = lazy(() => import('./MarkdownPreview.jsx'));
+
+<Suspense fallback={<Loading />}>
+  <MarkdownPreview />
+ </Suspense>
+```
+
 ## Le hook useReducer
 
 ## Le hook useContext
