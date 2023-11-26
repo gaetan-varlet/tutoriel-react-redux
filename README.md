@@ -456,7 +456,46 @@ Comme pour **useMemo**, à n'utiliser que pour optimiser les performances, aprè
 
 ## Les portails dans React
 
+- un portail permet d'écrire un composant dans un endroit spécifique du DOM plutôt que comme enfant de l'élément courant
+- intéressant pour les boîtes modales ou notifications qui doivent se retrouver au premier niveau de la structure de la page
+- il faut utiliser la méthode `createPortal()` en spécifiant l'élément cible en second paramètre, par exemple `document.body` pour le mettre à la racine du `body`
+- utilisation de la bibliothèque `react-dom`, qui a pour responsabilité d'appliquer les changements au niveau du DOM
+
+```js
+import { createPortal } from 'react-dom';
+
+function MyComponent() {
+  return (
+    <div >
+      <p>Cet enfant est placé dans la div parente.</p>
+      {createPortal(
+        <p>Cet enfant est placé dans le corps du document.</p>,
+        document.body
+      )}
+    </div>
+  );
+}
+```
+
 ## Capturer les erreurs avec ErrorBoundary
+
+- lorsqu'il y a une erreur, le comportement par défaut de React est de faire remonter l'erreur, ce qui a pour conséquence de faire planter l'application
+- il est cependant possible de capturer des erreurs provenant de composants enfants avec les `ErrorBoundary`, qui ne fonctionne qu'avec des composants sous forme de classe
+- il existe une librairie qui permet de gérer cela, `react-error-boundary`
+  - `fallback` permet d'afficher un message d'erreur à l'utilisateur
+  - `onReset()` permet de relancer l'action
+
+```js
+import { ErrorBoundary } from "react-error-boundary";
+
+function App () {
+
+    return <ErrorBoundary 
+        fallback={<div>Une erreur est survenue</div>}>
+      <SomeOtherComponents />
+    </ErrorBoundary>
+}
+```
 
 ## Chargement asynchrone via lazy()
 
